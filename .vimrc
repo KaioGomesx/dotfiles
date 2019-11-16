@@ -8,7 +8,13 @@ call plug#begin('~/.vim/bundle')
 	Plug 'prettier/vim-prettier', {
   \ 'do': 'yarn install',
   \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
+	Plug 'vim-airline/vim-airline'
 	Plug 'reewr/vim-monokai-phoenix'
+	Plug 'w0rp/ale'
+	Plug 'ryanoasis/vim-devicons'
+	Plug 'Yggdroot/indentLine'
+	Plug 'jiangmiao/auto-pairs'
+	Plug 'vim-airline/vim-airline-themes'
 	Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 	Plug 'scrooloose/syntastic'
@@ -18,21 +24,29 @@ call plug#begin('~/.vim/bundle')
 call plug#end()
 
 
-inoremap " ""<left>
-inoremap ' ''<left>
-inoremap ( ()<left>
-inoremap [ []<left>
-inoremap { {}<left>
-inoremap {<CR> {<CR>}<ESC>O
-inoremap {;<CR> {<CR>};<ESC>O
-
 let g:prettier#autoformat = 0
 autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html Prettier
 
+set mouse=a
+
+let g:ale_fixers = {
+ \ 'javascript': ['eslint']
+ \ }
+
+
+let g:ale_sign_error = '❌'
+let g:ale_sign_warning = '⚠️'
+
+let g:ale_fix_on_save = 1
+
+
+let g:airline_theme='molokai'
 colorscheme monokai-phoenix
 let g:mapleader = "," 
 set mouse=a
 set nu
+let g:indentLine_char = '┊'
+
 syntax on
 filetype plugin indent on              
 set showmatch
@@ -123,7 +137,6 @@ function! s:show_documentation()
 endfunction
 
 " Highlight symbol under cursor on CursorHold
-autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " Remap for rename current word
 nmap <leader>rn <Plug>(coc-rename)
@@ -137,7 +150,6 @@ augroup mygroup
   " Setup formatexpr specified filetype(s).
   autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
   " Update signature help on jump placeholder
-  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup end
 
 " Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
