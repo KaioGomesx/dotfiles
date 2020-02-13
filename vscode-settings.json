@@ -1,0 +1,14 @@
+{
+    "workbench.startupEditor": "newUntitledFile",
+    "workbench.colorTheme": "Dracula",
+    "editor.minimap.enabled": false, // removes minimap
+    "workbench.iconTheme": "material-icon-theme",
+    "editor.fontFamily": "Fira Code Medium",
+    "editor.fontLigatures": true,
+    "editor.fontSize": 15,
+    "explorer.openEditors.visible": 0, // removes the open editors section at the top of the sidebar, you can see the opened files with ⌘ + ⌥ + Tab
+    "editor.matchBrackets": "never", // removes the highlight of matching brackets (I use Subtle Match Brackets extension for this)
+    "editor.renderLineHighlight": "none", // removes line highlight
+    "editor.renderWhitespace": "none", // removes whitespace chars
+    "workbench.editor.tabCloseButton": "off", // removes cross icon from tabs
+}

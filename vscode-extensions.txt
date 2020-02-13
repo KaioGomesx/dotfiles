@@ -1,0 +1,8 @@
+code spell checker
+eslint
+prettier
+vscode-styled-components
+color highlight
+dracula
+material icon theme
+editorConfig for vscode
