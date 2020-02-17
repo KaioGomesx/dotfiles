@@ -1,4 +1,5 @@
 code spell checker
+git lens
 eslint
 prettier
 vscode-styled-components
