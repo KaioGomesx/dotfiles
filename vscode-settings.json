@@ -5,6 +5,7 @@
     "workbench.iconTheme": "material-icon-theme",
     "editor.fontFamily": "Fira Code Medium",
     "editor.fontLigatures": true,
+    "editor.formatOnSave": true,
     "editor.fontSize": 15,
     "explorer.openEditors.visible": 0, // removes the open editors section at the top of the sidebar, you can see the opened files with ⌘ + ⌥ + Tab
     "editor.matchBrackets": "never", // removes the highlight of matching brackets (I use Subtle Match Brackets extension for this)
