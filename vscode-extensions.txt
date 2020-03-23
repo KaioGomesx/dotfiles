@@ -4,6 +4,7 @@ eslint
 prettier
 vscode-styled-components
 color highlight
+dotenv
 dracula
 import cost
 material icon theme
