@@ -1,202 +1,163 @@
+" LEADER KEY
+let mapleader=","
+
+
+" COMPATIBILITY
+" Set 'nocompatible' to avoid unexpected things that your distro might have
+set nocompatible
+set t_ut=
+
+" BUNDLE
+" Automatically download vim-plug if it doesn't exist
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
+" Configure vim-plug
 call plug#begin('~/.vim/bundle')
-	Plug 'prettier/vim-prettier', {
-  \ 'do': 'yarn install',
-  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
-	Plug 'vim-airline/vim-airline'
-	Plug 'reewr/vim-monokai-phoenix'
-	Plug 'w0rp/ale'
-	Plug 'ryanoasis/vim-devicons'
-	Plug 'Yggdroot/indentLine'
-	Plug 'jiangmiao/auto-pairs'
-	Plug 'vim-airline/vim-airline-themes'
-	Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-	Plug 'scrooloose/syntastic'
-	Plug 'editorconfig/editorconfig-vim'
-	Plug 'sheerun/vim-polyglot'
-	Plug 'scrooloose/nerdcommenter'
+  Plug 'reewr/vim-monokai-phoenix'
+  Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
+  Plug 'heavenshell/vim-tslint'
+  Plug 'leafgarland/typescript-vim'
+  Plug 'pangloss/vim-javascript'
+  Plug 'maxmellon/vim-jsx-pretty'
+  Plug 'Yggdroot/indentLine'
+  Plug 'editorconfig/editorconfig-vim'  
+  Plug 'ctrlpvim/ctrlp.vim'
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}
 call plug#end()
 
-
-let g:prettier#autoformat = 0
-autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html Prettier
-
-set mouse=a
-
-let g:ale_fixers = {
- \ 'javascript': ['eslint']
- \ }
+" start deoplete at startup
+let g:deoplete#enable_at_startup = 1
 
 
-let g:ale_sign_error = '❌'
-let g:ale_sign_warning = '⚠️'
+" tslint lint on save
+autocmd BufWritePost *.ts,*.tsx call tslint#run('a', win_getid())
 
-let g:ale_fix_on_save = 1
+" indent line types
+let g:indentLine_char_list = ['┊']
 
-
-let g:airline_theme='molokai'
-colorscheme monokai-phoenix
-let g:mapleader = "," 
-set mouse=a
-set nu
-let g:indentLine_char = '┊'
-
+" SYNTAX
+" Enable syntax highlighting
 syntax on
-filetype plugin indent on              
-set showmatch
-set shiftwidth=2
-set completeopt=menu,longest,preview
-set softtabstop=2
-set tabstop=2
 
-" if hidden is not set, TextEdit might fail.
-set hidden
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
+
+
+" SEARCH
+" Highlight search term. Use :nohl to redraw screen and disable highlight
 set hlsearch
-set noswapfile
-" Some servers have issues with backup files, see #649
-set nobackup
-set nowritebackup
-set encoding=utf-8
-set nowrap
-" SYNTASTIC
-" Syntastic is a syntax checking plugin for Vim that runs files through
-" external syntax checkers and displays any resulting errors to the user.
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
+" Make Ag search from your project root
+let g:ag_working_path_mode="r"
 
-" Configure Standar JS as default linter
-let g:syntastic_javascript_checkers = ['standard']
-nnoremap <leader>ft :NERDTreeToggle<cr>
+" Use case insensitive search, except when using capital letters
+set ignorecase
+set smartcase
 
-" Better display for messages
-set cmdheight=2
+
+" AUTO IDENTATION
+" Enable auto identation with 'spaces' instead of 'tabs'
+set smartindent
+set expandtab
+set softtabstop=2
+set shiftwidth=2
+
+" ctrlp ignore node_modules
+let g:ctrlp_custom_ignore = 'node_modules'
+
+
+" MOVING BETWEEN FILES
+" Set 'hidden' if you want to open a new file inside the same buffer without the
+" need to save it first (if there's any unsaved changes).
 set hidden
 
-" You will have bad experience for diagnostic messages when it's default 4000.
-set updatetime=300
 
-" don't give |ins-completion-menu| messages.
-set shortmess+=c
+" REMEMBER THIGS
+" Tell vim to remember certain things when we exit
+"  '10  :  marks will be remembered for up to 10 previously edited files
+"  "100 :  will save up to 100 lines for each register
+"  :20  :  up to 20 lines of command-line history will be remembered
+"  %    :  saves and restores the buffer list
+"  n... :  where to save the viminfo files
+set viminfo='10,\"100,:20,%,n~/.viminfo
 
-" always show signcolumns
-set signcolumn=yes
-
-" Use tab for trigger completion with characters ahead and navigate.
-" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
-" Use <c-space> to trigger completion.
-inoremap <silent><expr> <c-space> coc#refresh()
-
-" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
-" Coc only does snippet and additional edit on confirm.
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-" Or use `complete_info` if your vim support it, like:
-" inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
-
-" Use `[g` and `]g` to navigate diagnostics
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
-
-" Remap keys for gotos
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-
-" Use K to show documentation in preview window
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
+function! ResCur()
+  if line("'\"") <= line("$")
+    normal! g`"
+    return 1
   endif
 endfunction
 
-" Highlight symbol under cursor on CursorHold
-
-" Remap for rename current word
-nmap <leader>rn <Plug>(coc-rename)
-
-" Remap for format selected region
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
-
-augroup mygroup
+augroup resCur
   autocmd!
-  " Setup formatexpr specified filetype(s).
-  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
-  " Update signature help on jump placeholder
-augroup end
+  autocmd BufWinEnter * call ResCur()
+augroup END
 
-" Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
-xmap <leader>a  <Plug>(coc-codeaction-selected)
-nmap <leader>a  <Plug>(coc-codeaction-selected)
 
-" Remap for do codeAction of current line
-nmap <leader>ac  <Plug>(coc-codeaction)
-" Fix autofix problem of current line
-nmap <leader>qf  <Plug>(coc-fix-current)
+" BACKUP
+" Disable all backup files, never used them
+set nobackup
+set nowritebackup
+set noswapfile
 
-" Create mappings for function text object, requires document symbols feature of languageserver.
-xmap if <Plug>(coc-funcobj-i)
-xmap af <Plug>(coc-funcobj-a)
-omap if <Plug>(coc-funcobj-i)
-omap af <Plug>(coc-funcobj-a)
+" COLOR SCHEME
+" Load molokai (alternative to Monokai from TextMate) color scheme
+colorscheme monokai-phoenix
 
-" Use <C-d> for select selections ranges, needs server support, like: coc-tsserver, coc-python
-nmap <silent> <C-d> <Plug>(coc-range-select)
-xmap <silent> <C-d> <Plug>(coc-range-select)
+" FONT
+set guifont=Cascadia\ Code:h14
+set antialias
 
-" Use `:Format` to format current buffer
-command! -nargs=0 Format :call CocAction('format')
+" ENCODING
+set encoding=utf-8
 
-" Use `:Fold` to fold current buffer
-command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+" COMMAND LINE
+" Enhanced command line completion
+set wildmenu
 
-" use `:OR` for organize import of current buffer
-command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+" Complete files like a shell
+set wildmode=list:longest
 
-" Add status line support, for integration with other plugin, checkout `:h coc-status`
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+" SEARCH
+" Vim will start searching as you type
+set incsearch
 
-" Using CocList
-" Show all diagnostics
-nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
-" Manage extensions
-nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
-" Show commands
-nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
-" Find symbol of current document
-nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
-" Search workspace symbols
-nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
-" Do default action for next item.
-nnoremap <silent> <space>j  :<C-u>CocNext<CR>
-" Do default action for previous item.
-nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
-" Resume latest coc list
-nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+" Enable Mouse
+set mouse=a
+
+" FILE NUMBERS
+" Enable relative and absolute file numbers
+set number
+
+" WRAP
+" Stop wrapping long lines
+set nowrap
+
+" AUTORELOAD
+" Automatically reload buffers when file changes
+set autoread
+
+" PLUGINS CONFIGURATIONS
+
+" CtrlP
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
+
+" prettier enable autoFormat
+let g:prettier#autoformat = 1
+
+
+" Syntastic
+nnoremap <leader>st :SyntasticToggleMode<cr>
+
+" NERDTree
+nnoremap <leader>ft :NERDTreeToggle<cr>
