@@ -9,3 +9,4 @@ dracula
 import cost
 material icon theme
 editorConfig for vscode
+tabnine
