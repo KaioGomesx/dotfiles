@@ -68,4 +68,22 @@ colors:
   indexed_colors: []
 
 # Visual Bell
-# ...
+
+font:
+  # The normal (roman) font face to use.
+  normal:
+    family: Fira Code Medium
+    # Style can be specified to pick a specific face.
+    # style: Regular
+
+  # The bold font face
+  bold:
+    family: Fira Code Medium
+    # Style can be specified to pick a specific face.
+    # style: Bold
+
+  # The italic font face
+  italic:
+    family: Fira Code Medium
+    # Style can be specified to pick a specific face.
+    # style: Italic
