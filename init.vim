@@ -5,7 +5,7 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.config/nvim/bundle')
-	 Plug 'Yggdroot/indentLine'
+         Plug 'Yggdroot/indentLine'
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
   Plug 'reewr/vim-monokai-phoenix'
@@ -18,7 +18,6 @@ call plug#begin('~/.config/nvim/bundle')
     \ 'for': ['javascript', 'typescript', 'python'] }
 call plug#end()
 
-
 let mapleader = ","
 
 map <C-n> :NERDTreeToggle<CR>
@@ -27,8 +26,23 @@ syntax on
 colorscheme monokai-phoenix
 set tabstop=2
 set expandtab
+set shiftwidth=2
 set autoindent
 set mouse=r
 set nu
 set nobackup
 set nowritebackup
+
+" autocloses
+inoremap " ""<left>
+inoremap ' ''<left>
+inoremap ( ()<left>
+inoremap [ []<left>
+inoremap { {}<left>
+inoremap {<CR> {<CR>}<ESC>O
+inoremap {;<CR> {<CR>};<ESC>O
+
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
