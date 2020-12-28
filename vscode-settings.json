@@ -7,8 +7,6 @@
     "editor.renderLineHighlight": "none", // removes line highlight
     "editor.overviewRulerBorder": false, // removes border from overview ruler (located on the right, same position as the scrollbar)
     "editor.hideCursorInOverviewRuler": true, // hides cursor mark in the overview ruler
-    "editor.folding": false, // removes the folding feature
-    "editor.occurrencesHighlight": false, // removes highlights occurrences (still works when you select a word)
     "editor.matchBrackets": "never", // removes the highlight of matching brackets (I use Subtle Match Brackets extension for this)
     "editor.glyphMargin": false, // removes the space used mainly for debugging indicators
     "explorer.openEditors.visible": 0, // removes the open editors section at the top of the sidebar, you can see the opened files with ⌘ + ⌥ + Tab
@@ -16,4 +14,4 @@
     "workbench.editor.showIcons": false, // removes icon from opened files in tabs
     "workbench.editor.tabCloseButton": "off", // removes cross icon from tabs
     "workbench.statusBar.visible": false,
-  }
+}
