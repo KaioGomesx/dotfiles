@@ -42,8 +42,8 @@ let g:coc_global_extensions = [
 let g:user_emmet_leader_key='<C-Z>'
 
 nmap <C-n> :NERDTreeToggle<CR>
-vmap ++ <plug>NERDCommenterToggle
-nmap ++ <plug>NERDCommenterToggle
+vmap <C-_> <plug>NERDCommenterToggle<CR>
+nmap <C-_> <plug>NERDCommenterToggle<CR>
 set hidden
 syntax on
 set nu
