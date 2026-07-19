@@ -1,30 +1,58 @@
 {
     "$help": "https://aka.ms/terminal-documentation",
     "$schema": "https://aka.ms/terminal-profiles-schema",
-    "actions": [],
-    "copyFormatting": "none",
-    "copyOnSelect": true,
-    "defaultProfile": "{46ca431a-3a87-5fb3-83cd-11ececc031d2}",
-    "disabledProfileSources": 
+    "actions": 
     [
-        "Windows.Terminal.VisualStudio",
-        "Windows.Terminal.Azure"
+        {
+            "command": 
+            {
+                "action": "copy",
+                "singleLine": false
+            },
+            "id": "User.copy.644BA8F2"
+        },
+        {
+            "command": "paste",
+            "id": "User.paste"
+        },
+        {
+            "command": 
+            {
+                "action": "splitPane",
+                "split": "auto",
+                "splitMode": "duplicate"
+            },
+            "id": "User.splitPane.A6751878"
+        },
+        {
+            "command": "find",
+            "id": "User.find"
+        }
     ],
+    "alwaysOnTop": false,
+    "copyFormatting": "none",
+    "copyOnSelect": false,
+    "defaultProfile": "{c1d4d0e8-9f35-4c57-b8cb-1d65c4f3f001}",
     "keybindings": 
     [
         {
-            "id": "Terminal.CopyToClipboard",
+            "id": "User.copy.644BA8F2",
             "keys": "ctrl+c"
         },
         {
-            "id": "Terminal.PasteFromClipboard",
+            "id": "User.paste",
             "keys": "ctrl+v"
         },
         {
-            "id": "Terminal.DuplicatePaneAuto",
+            "id": "User.find",
+            "keys": "ctrl+shift+f"
+        },
+        {
+            "id": "User.splitPane.A6751878",
             "keys": "alt+shift+d"
         }
     ],
+    "language": "pt-BR",
     "newTabMenu": 
     [
         {
@@ -35,38 +63,86 @@
     {
         "defaults": 
         {
-            "colorScheme": "Dracula"
+            "colorScheme": "Catppuccin Mocha",
+            "cursorShape": "filledBox",
+            "experimental.retroTerminalEffect": false,
+            "intenseTextStyle": "all",
+            "opacity": 80,
+            "padding": "8",
+            "useAcrylic": true
         },
         "list": 
         [
             {
-                "commandline": "%SystemRoot%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+                "colorScheme": "Catppuccin Mocha",
+                "commandline": "wsl.exe -d kali-linux",
+                "cursorShape": "bar",
+                "font": 
+                {
+                    "face": "JetBrains Mono NL"
+                },
+                "guid": "{c1d4d0e8-9f35-4c57-b8cb-1d65c4f3f001}",
+                "icon": "C:/Program Files/WindowsApps/KaliLinux*/kali.ico",
+                "name": "Kali Linux",
+                "opacity": 50,
+                "startingDirectory": "//wsl$/kali-linux/home/kaio",
+                "tabTitle": "Kali"
+            },
+            {
                 "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
                 "hidden": false,
                 "name": "Windows PowerShell"
-            },
-            {
-                "adjustIndistinguishableColors": "always",
-                "cursorColor": "#E5E5E5",
-                "cursorShape": "filledBox",
-                "font": 
-                {
-                    "face": "Cascadia Code"
-                },
-                "guid": "{46ca431a-3a87-5fb3-83cd-11ececc031d2}",
-                "hidden": false,
-                "name": "kali-linux",
-                "source": "Windows.Terminal.Wsl"
-            },
-            {
-                "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
-                "hidden": false,
-                "name": "Command Prompt"
             }
         ]
     },
     "schemes": 
     [
+        {
+            "background": "#1E1E2E",
+            "black": "#45475A",
+            "blue": "#89B4FA",
+            "brightBlack": "#585B70",
+            "brightBlue": "#89B4FA",
+            "brightCyan": "#94E2D5",
+            "brightGreen": "#A6E3A1",
+            "brightPurple": "#F5C2E7",
+            "brightRed": "#F38BA8",
+            "brightWhite": "#A6ADC8",
+            "brightYellow": "#F9E2AF",
+            "cursorColor": "#F5E0DC",
+            "cyan": "#94E2D5",
+            "foreground": "#CDD6F4",
+            "green": "#A6E3A1",
+            "name": "Catppuccin Mocha",
+            "purple": "#F5C2E7",
+            "red": "#F38BA8",
+            "selectionBackground": "#585B70",
+            "white": "#BAC2DE",
+            "yellow": "#F9E2AF"
+        },
+        {
+            "background": "#000000",
+            "black": "#0C0C0C",
+            "blue": "#0037DA",
+            "brightBlack": "#767676",
+            "brightBlue": "#3B78FF",
+            "brightCyan": "#61D6D6",
+            "brightGreen": "#16C60C",
+            "brightPurple": "#B4009E",
+            "brightRed": "#E74856",
+            "brightWhite": "#F2F2F2",
+            "brightYellow": "#F9F1A5",
+            "cursorColor": "#FFFFFF",
+            "cyan": "#3A96DD",
+            "foreground": "#FFFFFF",
+            "green": "#13A10E",
+            "name": "Color Scheme 15",
+            "purple": "#881798",
+            "red": "#C50F1F",
+            "selectionBackground": "#FFFFFF",
+            "white": "#CCCCCC",
+            "yellow": "#C19C00"
+        },
         {
             "background": "#282A36",
             "black": "#21222C",
@@ -91,5 +167,8 @@
             "yellow": "#F1FA8C"
         }
     ],
-    "themes": []
+    "tabWidthMode": "titleLength",
+    "themes": [],
+    "useAcrylicInTabRow": true,
+    "windowingBehavior": "useNew"
 }
